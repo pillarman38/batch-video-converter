@@ -30,7 +30,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "http": "0.0.1-security",
     "nodemon": "^2.0.4",
-    "rxjs": "~6.5.4",
+    "rxjs": "^6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

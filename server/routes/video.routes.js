@@ -11,5 +11,14 @@ router.post('/getinfo', (req, res)=>{
         }
     })
 })
-
+// selectDirectory
+router.get('/selectDirectory', (req, res)=>{
+    models.getDirectory((err, results)=>{
+        if(err){
+            return res.send({err: err})
+        } else {
+            res.send(results)
+        }
+    })
+})
 module.exports = router

@@ -1,6 +1,75 @@
+<div *ngIf="!info">
+    <div id="drop-area" (drop)="dropHandler($event);" (dragover)="dragOverHandler($event);">
+        <p>Drag one or more files to this Drop Zone ...</p>
+    </div>
+    <label class="button" for="fileElem">Select some files</label>
+    <p>{{info}}</p>
+</div>
+<div *ngIf="info">
+    <div id="arrOftitles">
+        <div class="tab">
+            <button class="tablinks" (click)="openCity($event, 'summary')">Summary</button>
+            <!-- <button class="tablinks" (click)="openCity($event, 'video')">Video</button> -->
+            <!-- <button class="tablinks" (click)="openCity($event, 'Tokyo')">Audio</button> -->
+          </div>
+    </div>
+    
 
-  <div id="drop-area" (drop)="dropHandler($event);" (dragover)="dragOverHandler($event);">
-    <p>Drag one or more files to this Drop Zone ...</p>
+  <div id="summaryList">
+    <div *ngFor="let title of info">
+      <table>
+        <td>{{title.format.filename}}</td>
+      </table>
+    </div>
   </div>
-  <label class="button" for="fileElem">Select some files</label>
 
+  <div id="video" class="tabcontent">
+    <h3>video</h3>
+    <p>Format</p>
+    <select name="format" id="formatSelector">
+      <option value="mp4">mp4</option>
+      <option value="mkv">mkv</option>
+    </select>
+    <select name="codec" id="cdecSelector">
+      <option value="h264">H.264(x264)</option>
+      <option value="h265">H.264(x265)</option>
+    </select>
+    <select name="frame rate" id="fpsSelector">
+      <option value="0">Same as source</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="23.976">23.976</option>
+      <option value="24">24</option>
+      <option value="25">25</option>
+      <option value="48">48</option>
+    </select>
+    <div class="slidecontainer">
+      <p>Quality Scale</p>
+      <p>Custom range slider:</p>
+      <input type="range" min="0" max="51" value="18" class="slider" id="myRange" #myRange (input)="sliderValueChange($event)">
+      <p>{{compressionSlider}}</p>
+    </div>
+  </div>
+  
+  <div id="audio" class="tabcontent">
+    <h3>Audio</h3>
+    <p>Paris is the capital of France.</p> 
+    <div *ngFor="let title of audio">
+      <table>
+        <tr>
+          <select>
+            <option *ngFor="let title of audio">
+                {{title.codec_name}}
+            </option>
+          </select>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div id="saveFiles">
+    <input type="file" id="createNewFile" value="Create new files" (click)="saveDir()"/>
+  </div>
+  <button type="submit">Convert</button>
+</div>
